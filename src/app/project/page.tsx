@@ -4,8 +4,12 @@ import '@ant-design/v5-patch-for-react-19';
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
 
+import logger from '@/lib/logger';
+
 export default function Page() {
   const [visible, setVisible] = useState(false);
+  logger('Hello, World!');
+
   return (
     <div className="flex justify-center items-center h-screen">
       <Modal

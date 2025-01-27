@@ -38,6 +38,7 @@ const eslintConfig = [
       '@typescript-eslint/explicit-function-return-type': 'off',
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+      "no-console": "no",
       '@typescript-eslint/naming-convention': [
         'error',
         {
@@ -59,6 +60,8 @@ const eslintConfig = [
         'error',
         {
           case: 'kebabCase',
+          // ignore hooks
+          ignore: ['^use'],
         },
       ],
       'check-file/folder-naming-convention': [

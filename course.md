@@ -2,7 +2,7 @@
 
 ## **1. What is TypeScript?**
 
-- Modern Web Development
+- Modern Web Development.
 - TypeScript is a superset of JavaScript.
 - TypeScript is a statically typed language.
 - TypeScript is a compiled language.
@@ -75,6 +75,49 @@
 
 - Prevents misuse of APIs by enforcing expected input/output types.
 
+  - Example:
+
+    ```typescript
+    interface User {
+      id: number;
+      name: string;
+    }
+
+    function getUser(user: User): string {
+      return `User: ${user.name}`;
+    }
+
+    // Correct usage
+    const validUser: User = { id: 1, name: 'Alice' };
+    console.log(getUser(validUser)); // Output: User: Alice
+
+    // Incorrect usage - TypeScript will give an error
+    const invalidUser = { id: 'one', name: 'Bob' }; // Error: Type 'string' is not assignable to type 'number'
+    console.log(getUser(invalidUser)); // This line will not compile
+    ```
+
+    ```typescript
+    interface User {
+      id: number;
+      name: string;
+    }
+
+    interface UserOutput extends User {
+      username: string;
+    }
+
+    function getUser(user: User): UserOutput {
+      return { id: user.id, name: user.name, username: user.name.toLowerCase() };
+    }
+
+    // Correct usage
+    const validUser: User = { id: 1, name: 'Alice' };
+    console.log(getUser(validUser).username); // Output: { id: 1, name: 'Alice', username: 'alice'
+
+    // Incorrect usage - TypeScript will give an error
+    console.log(getUser(validUser).firstName); // Error: Argument of type '{ id: number; name: string; username: number; }' is not assignable to parameter of type 'User'
+    ```
+
 ### **3.3 Advanced Type System**
 
 - **Generics**: Write reusable and type-safe components.
@@ -97,6 +140,15 @@
   const response: Response = { data: { id: 1 }, error: '' };
   ```
 
+- **Utility Types**: Built-in helpers for common type transformations.
+
+  ```typescript
+  type Point = { x: number; y: number };
+  type PartialPoint = Partial<Point>;
+
+  const point: PartialPoint = { x: 1 };
+  ```
+
 ## **3.4 Improved Team Collaboration**
 
 - Type definitions enhance clarity and communication within the team.
@@ -115,6 +167,8 @@
   ```bash
   npm install --save-dev @types/react
   ```
+
+**Note**: Not all libraries have type definitions, but many popular ones do.
 
 ## **4. Challenges and Limitations**
 
@@ -161,3 +215,92 @@
   const num = identity<number>(42); // T is inferred as number
   const str = identity<string>('Hello'); // T is inferred as string
   ```
+
+- **Example 4**: Utility Types
+
+  - Partial: Makes all properties of a type optional.
+
+    ```typescript
+    type Point = { x: number; y: number };
+    type PartialPoint = Partial<Point>;
+
+    const point: PartialPoint = { x: 1 };
+    ```
+
+  - Required: Makes all properties of a type required.
+
+    ```typescript
+    type PartialPoint = { x?: number; y?: number };
+    type RequiredPoint = Required<PartialPoint>;
+
+    const point: RequiredPoint = { x: 1, y: 2 };
+    ```
+
+  - Readonly: Makes all properties of a type read-only.
+
+    ```typescript
+    type Point = { x: number; y: number };
+    type ReadonlyPoint = Readonly<Point>;
+
+    const point: ReadonlyPoint = { x: 1, y: 2 };
+    point.x = 3; // Error: Cannot assign to 'x' because it is a read-only property.
+    ```
+
+  - Pick: Picks only selected properties from a type.
+
+    ```typescript
+    type Point = { x: number; y: number; z: number };
+    type Point2D = Pick<Point, 'x' | 'y'>;
+
+    const point: Point2D = { x: 1, y: 2 };
+    ```
+
+  - Omit: Omits selected properties from a type.
+
+    ```typescript
+    type Point = { x: number; y: number; z: number };
+    type Point2D = Omit<Point, 'z'>;
+
+    const point: Point2D = { x: 1, y: 2 };
+    ```
+
+  - Record: Creates a type with a set of properties K of type T.
+
+    ```typescript
+    type ThreeStringProps = Record<'prop1' | 'prop2' | 'prop3', string>;
+
+    const obj: ThreeStringProps = { prop1: 'a', prop2: 'b', prop3: 'c' };
+    ```
+
+  - Exclude: Exclude from T those types that are assignable to U.
+
+    ```typescript
+    type T = string | number;
+    type U = number;
+    type TWithoutU = Exclude<T, U>; // string
+    ```
+
+  - Extract: Extract from T those types that are assignable to U.
+
+    ```typescript
+    type T = string | number;
+    type U = number;
+    type TExtractU = Extract<T, U>; // number
+    ```
+
+  - NonNullable: Exclude null and undefined from T.
+
+    ```typescript
+    type T = string | null | undefined;
+    type TNonNull = NonNullable<T>; // string
+    ```
+
+  - ReturnType: Obtain the return type of a function type.
+
+    ```typescript
+    function f1(): { a: number; b: string } {
+      return { a: 1, b: 'hello' };
+    }
+
+    type T1 = ReturnType<typeof f1>; // { a: number; b: string }
+    ```

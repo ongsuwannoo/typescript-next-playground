@@ -5,17 +5,11 @@ import type { TableProps } from 'antd';
 import { Button, Modal, Space, Table, Tag } from 'antd';
 import { useState } from 'react';
 
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
-}
+import { IDataPerson } from '@/types/person';
 
 export default function ProjectDetail({ projectId }: { projectId: string }) {
   const [visible, setVisible] = useState(false);
-  const columns: TableProps<DataType>['columns'] = [
+  const columns: TableProps<IDataPerson>['columns'] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -64,7 +58,7 @@ export default function ProjectDetail({ projectId }: { projectId: string }) {
     },
   ];
 
-  const data: DataType[] = [
+  const data: IDataPerson[] = [
     {
       key: '1',
       name: 'John Brown',
@@ -113,7 +107,7 @@ export default function ProjectDetail({ projectId }: { projectId: string }) {
         >
           Project Detail {projectId}
         </Button>
-        <Table<DataType> columns={columns} dataSource={data} />
+        <Table<IDataPerson> columns={columns} dataSource={data} />
       </Space>
     </div>
   );
