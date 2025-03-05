@@ -88,7 +88,7 @@ export default function ProjectDetail({ projectId }: { projectId: string }) {
       <Modal
         centered
         open={visible}
-        title="Basic Modal Feature 2-test-2"
+        title="Basic Modal Feature 2-test-3"
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
       >
