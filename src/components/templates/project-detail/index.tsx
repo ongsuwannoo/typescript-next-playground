@@ -106,7 +106,7 @@ export default function ProjectDetail({ projectId }: { projectId: string }) {
             setVisible(true);
           }}
         >
-          Project Detail {projectId} Feature 1-test-2
+          Project Detail {projectId} Feature 1-test-3
         </Button>
         <Table<IDataPerson> columns={columns} data={data} />
       </Space>
