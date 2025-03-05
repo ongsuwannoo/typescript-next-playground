@@ -1,8 +1,5 @@
-import { Button as ButtonAntd, ButtonProps as ButtonAntdProps } from 'antd';
-
-interface ButtonProps extends ButtonAntdProps {
-  children?: React.ReactNode;
-}
+import { ButtonProps } from '@/types/components';
+import { Button as ButtonAntd } from 'antd';
 
 const Button = ({ children, ...props }: ButtonProps) => {
   return (

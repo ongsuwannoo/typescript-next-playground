@@ -2,10 +2,11 @@
 import '@ant-design/v5-patch-for-react-19';
 
 import type { TableProps } from 'antd';
-import { Button, Modal, Space, Table, Tag } from 'antd';
+import { Button, Modal, Space, Tag } from 'antd';
 import { useState } from 'react';
 
 import { IDataPerson } from '@/types/person';
+import Table from '@/components/organisms/table/table-antd';
 
 export default function ProjectDetail({ projectId }: { projectId: string }) {
   const [visible, setVisible] = useState(false);
@@ -107,7 +108,7 @@ export default function ProjectDetail({ projectId }: { projectId: string }) {
         >
           Project Detail {projectId}
         </Button>
-        <Table<IDataPerson> columns={columns} dataSource={data} />
+        <Table<IDataPerson> columns={columns} data={data} />
       </Space>
     </div>
   );

@@ -1,4 +1,4 @@
-import ProjectDetail from './project-detail';
+import ProjectDetail from '@/components/templates/project-detail';
 
 export default async function Page({
   params,
