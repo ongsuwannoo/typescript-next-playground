@@ -6,7 +6,7 @@ import { Button, Modal, Space, Tag } from 'antd';
 import { useState } from 'react';
 
 import { IDataPerson } from '@/types/person';
-import Table from '@/components/organisms/table/table-antd';
+import Table from '@/components/combine-component/table';
 
 export default function ProjectDetail({ projectId }: { projectId: string }) {
   const [visible, setVisible] = useState(false);
